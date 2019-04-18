@@ -6,7 +6,7 @@ services:
   - docker
 
 script:
-    - docker build -t vect0r/python-app .
+    - echo $DOCKER_USERNAME
 
 after_success:
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
