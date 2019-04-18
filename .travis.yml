@@ -5,11 +5,12 @@ language: bash
 services:
   - docker
 
+branches:
+  only:
+  - master
+
 script:
-    - echo $DOCKER_USERNAME
+    - pwd && ls -ltr
 
 after_success:
-    - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
-      docker push vitalyb/python-app;
-      fi
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push vitalyb/python-app;
