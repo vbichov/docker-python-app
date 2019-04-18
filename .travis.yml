@@ -10,7 +10,8 @@ branches:
   - master
 
 script:
-    - pwd && ls -ltr
+    - docker build -t vitalyb/python-app .
+
 
 after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push vitalyb/python-app;
