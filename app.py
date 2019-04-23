@@ -37,6 +37,7 @@ def process_request():
     return fqdn
 
 @app.route('/host')
+@REQUEST_TIME.time()
 def host():
     path = str(request.path)
     verb = request.method
@@ -76,4 +77,4 @@ def start_prometheus_server():
 start_prometheus_server()
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0')
+    app.run(debug=False,host='0.0.0.0',threaded=True)
