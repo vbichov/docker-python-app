@@ -34,12 +34,20 @@ def hello_world():
 # Decorate function with metric.
 def process_request():
     """A dummy function that takes some time."""
-    weithed_sleep_times = [0.005] * 1 + [0.01] * 3 + [0.025] * 5 + [0.05] * 7 + [0.075] * 5 + [0.1] * 4 + [0.25] * 2 + [0.5] + [0.75] + [1.0] + [2.5]
-    sleep(random.choice(weithed_sleep_times))
-    fqdn = socket.getfqdn()
-    return fqdn
+    weithed_sleep_times =   [0.004] * 1 + \
+                            [0.009] * 3 + \
+                            [0.0249] * 5 + \
+                            [0.04] * 7 + \
+                            [0.074] * 5 + \
+                            [0.09] * 4 + \
+                            [0.24] * 2 + \
+                            [0.4] + [0.74] + [0.9] + [2.49]
+    cosen_sleep_time = random.choice(weithed_sleep_times)
+    sleep(cosen_sleep_time)
+    
+    return f"Did complicated things for {cosen_sleep_time} seconds."
 
-@app.route('/host')
+@app.route('/work')
 # @HOST_REQUEST_TIME.time()
 def host():
     path = str(request.path)
@@ -49,7 +57,7 @@ def host():
     c.labels(**label_dict).inc()
     with REQUEST_TIME.labels(verb, path).time():
         ret = str(process_request())
-        return "The name of this host is: {}".format(ret)
+        return ret
 
 @app.route('/metrics')
 def metrics():
